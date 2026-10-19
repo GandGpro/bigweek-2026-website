@@ -151,7 +151,8 @@ body.is-scrolled .orb { opacity: 0.32; }
 .eyebrow::before { content: ""; width: 26px; height: 1px; background: currentColor; }
 .eyebrow--plain::before { display: none; }
 .dateline { display: flex; flex-direction: column; gap: 4px; margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--butter); }
-.dateline span + span { color: var(--text-dim); }
+.dateline .dateline__venue { color: var(--cream); font-size: 14px; letter-spacing: 0.24em; margin-top: 4px; }
+.dateline .dateline__addr { color: var(--text-dim); font-size: 10px; letter-spacing: 0.24em; font-weight: 500; }
 .eyebrow .x-mark { font-size: 14px; }
 
 .display {
@@ -290,7 +291,9 @@ body.is-scrolled .orb { opacity: 0.32; }
 }
 .hero__dates .dash { color: var(--butter); }
 .hero__place { margin: 10px 0 0; font-size: 13px; letter-spacing: 0.42em; text-transform: uppercase; font-weight: 600; }
-.hero__place { color: var(--text-dim); }
+.hero__place { display: flex; flex-direction: column; gap: 4px; }
+.hero__venue { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 2.6vw, 38px); line-height: 1; letter-spacing: 0.02em; color: var(--cream); }
+.hero__addr { font-size: 11px; letter-spacing: 0.26em; color: var(--text-dim); }
 
 .status { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(251, 239, 230, 0.14); }
 .status__label { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin: 0 0 12px; }
@@ -523,6 +526,7 @@ body.is-scrolled .orb { opacity: 0.32; }
 .footer__logo { width: min(360px, 100%); height: auto; margin-bottom: 22px; }
 .footer__tag { margin: 0 0 18px; font-size: 13px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; line-height: 1.9; color: var(--text-dim); }
 .footer__tag b { color: var(--cream); font-weight: 600; }
+.footer__addr { font-size: 10px; letter-spacing: 0.2em; color: var(--text-faint); }
 .socials { display: flex; gap: 10px; margin-top: 22px; }
 .socials a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(251, 239, 230, 0.2); color: var(--cream); transition: all 0.3s var(--ease); }
 .socials a:hover { background: var(--butter); border-color: var(--butter); color: var(--navy); }

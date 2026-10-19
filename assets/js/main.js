@@ -7,8 +7,8 @@
 
   /* ---------- Sales state ----------
      prereg  : pre-registration open (until 4 Oct 23:59)
-     closed  : pre-reg closed, waiting for loyalty on-sale (8 Oct 10:00)
-     loyalty : on sale to pre-registered customers (8 Oct 10:00 → 9 Oct 10:00)
+     closed  : pre-reg closed, waiting for loyalty on-sale (config.dates.loyaltyOnSale)
+     loyalty : on sale to pre-registered customers (until config.dates.publicOnSale)
      onsale  : on sale to the public
      Preview any state with ?state=closed etc. */
   function t(key) { return new Date(cfg.dates[key]).getTime(); }
@@ -24,7 +24,7 @@
 
   var countdownTargets = {
     prereg: { key: "preRegCloses", label: "Pre-registration closes in" },
-    closed: { key: "loyaltyOnSale", label: "Loyalty tickets on sale in" },
+    closed: { key: "loyaltyOnSale", label: "Tickets on sale in" },
     loyalty: { key: "publicOnSale", label: "Public sale opens in" },
     onsale: { key: "festivalStart", label: "The Homecoming starts in" }
   };

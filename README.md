@@ -32,17 +32,16 @@ Optional: the `days`, `bigPass` and `bigTable` entries can hold more specific Ho
 ### Sale dates (drive every countdown and button switch)
 ```js
 preRegCloses:  "2026-10-02T00:00:00+02:00",
-loyaltyOnSale: "2026-10-08T12:00:00+02:00",
-publicOnSale:  "2026-10-09T12:00:00+02:00",
+loyaltyOnSale: "2026-10-22T10:00:00+02:00",
+publicOnSale:  "2026-10-23T10:00:00+02:00",
 festivalStart: "2026-12-27T15:00:00+02:00"
 ```
 The site changes itself on these dates:
 
 | Until | What visitors see |
 |---|---|
-| 4 Oct 23:59 | Pre-Register buttons, countdown to pre-reg closing |
-| 8 Oct 12:00 | "Pre-registration closed", countdown to on-sale |
-| 9 Oct 12:00 | Buy buttons live (loyalty sale), countdown to public sale |
+| 22 Oct 10:00 | "Coming soon" buttons, countdown to the pre-registered on-sale |
+| 23 Oct 10:00 | Buy buttons live (pre-registered sale), countdown to public sale |
 | After | Buy buttons live, countdown to the festival |
 
 **Preview any stage** by adding `?state=` to a page address, e.g. `tickets.html?state=onsale`
@@ -85,7 +84,7 @@ Each line gives the section, the element, its position and size on desktop, and 
 ## Things to know
 
 - **Enquiry form:** the site has no server, so **Send enquiry** opens the visitor's own email app with the enquiry pre-filled to info@gandgpro.com. To receive submissions directly instead, connect a form service such as Formspree or Netlify Forms after deploying.
-- **Venue:** "Venue coming soon" appears on every page. When the venue is announced, search the `.html` files for `Venue coming soon`.
+- **Venue:** Kingsmead Stadium Outer Field, 10 Kingsmead Way, Stamford Hill, Durban. It appears in every page header, the home hero, the footer, the Info page (tile + FAQ with a Google Maps link), the Tickets page, llms.txt and the structured data in index.html.
 - **Fonts:** Amatic SC (headlines) and Poppins (body), loaded from Google Fonts.
 - **Images:** `assets/img/gallery/` holds last year's photos, optimised and ready for future use. They aren't on any page yet.
 - **Partner photos:** two Flying Fish photos (DSC03057 and DSC03059, which came out almost black) were left out of the gallery.
