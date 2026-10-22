@@ -13,7 +13,7 @@ window.BW_CONFIG = {
 
     // Main Howler event page — every "Buy now" / "Get tickets" button uses this
     // unless a more specific link below is filled in.
-    tickets: "https://bigweek.howler.co.za",
+    tickets: "https://bigweek.howler.co.za/bigweek",
     days: {
       "yanoz-club": "",
       "shimza": "",

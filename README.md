@@ -24,7 +24,7 @@ Open `assets/js/config.js` in any text editor, change the value, save and re-upl
 
 ### Ticket links
 ```js
-tickets: "https://bigweek.howler.co.za",
+tickets: "https://bigweek.howler.co.za/bigweek",
 ```
 Every **Buy now / Get tickets** button on the site uses this link.
 Optional: the `days`, `bigPass` and `bigTable` entries can hold more specific Howler links later. Blank entries fall back to `tickets`.
