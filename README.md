@@ -52,18 +52,17 @@ The site changes itself on these dates:
 nights: {
   "yanoz-club": [
     { name: "Uncle Waffles", headliner: true, video: "yanoz-club-headliner" },
-    { name: "Artist Two", photo: "artist-two.jpg" },
+    "Artist Two",
     "Artist Three"
   ],
   ...
 }
 ```
-- **Photos:** save them in `assets/img/artists/`. Use portrait 4:5 (about 1000 x 1250 px) JPGs, named simply, e.g. `artist-two.jpg`.
-- **Name only:** an artist without a photo shows a placeholder card with their initial until a photo is added.
-- **Headliner:** `headliner: true` puts the artist at the top of their night as the hero: big on the Lineup page, and as the poster in that night's column on Home. The other artists sit below.
+- **Photos:** only used for a headliner without an animation. Save them in `assets/img/artists/` as portrait 9:16 JPGs (about 720 x 1280 px).
+- **Headliner:** `headliner: true` puts the artist at the top of their night as the hero: their animation and name, at the top of that night's column on Home and on the Lineup page. The other artists sit below as names.
 - **Headliner animation:** `video: "yanoz-club-headliner"` points to three files in `assets/video/`: `yanoz-club-headliner.mp4` (720 x 1280, no sound, keep it under ~3 MB), `yanoz-club-headliner.jpg` (a still frame, 720 wide) and `yanoz-club-headliner-sm.jpg` (the same still, 360 wide, used on Home). Animations play muted on a loop only while on screen. Visitors who turn off motion or use data saver see the still instead. Without `video`, a headliner uses its `photo`.
-- **Placeholders:** empty spots show "Coming soon" cards, and a "More to come" card stays at the end until you set `complete: true`.
-- **Where names show:** the Lineup page shows the headliner hero plus photo cards. Home shows the headliner poster plus names. The Chapters page shows names only.
+- **Placeholders:** each night is topped up to three spots with "Coming soon", and a "More to be announced" line stays at the end until you set `complete: true`.
+- **Where names show:** Home and the Lineup page use the same four night columns: the headliner animation, then the names. The Chapters page shows names only.
 
 ### Partner gallery (Partners page)
 Shown as brand tabs (Flying Fish first), each opening a swipeable row of photos.

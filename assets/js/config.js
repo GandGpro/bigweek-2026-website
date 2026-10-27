@@ -33,12 +33,11 @@ window.BW_CONFIG = {
 
   /* Lineup — add artists to each night whenever you announce them (one or many at a time).
      Each artist can be just a name:        "Artist Name"
-     or a name with a photo:                { name: "Artist Name", photo: "artist-name.jpg" }
      Make an artist a headliner (shown big at the top of their night, on Home and the Lineup page):
                                             { name: "Artist Name", headliner: true, video: "night-slug-headliner" }
      video = the animation file name (no extension) in assets/video/. Each needs three files:
        name.mp4 (720 x 1280, muted), name.jpg (still frame, 720 wide) and name-sm.jpg (360 wide).
-     Photos go in assets/img/artists/ — portrait 4:5, about 1000 x 1250 px, JPG.
+     A headliner without an animation can use photo: "name.jpg" (assets/img/artists/, portrait 9:16).
      Names show in the order listed. Set complete: true once the full lineup is out. */
   lineup: {
     complete: false,

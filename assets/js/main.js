@@ -242,12 +242,12 @@
     };
     /* Headliner hero: looping animation (video) with the poster frame as fallback */
     var renderHero = function (box) {
-      var slug = box.dataset.lineupHero, mini = box.hasAttribute("data-mini");
+      var slug = box.dataset.lineupHero, small = box.hasAttribute("data-small");
       var heads = listOf(slug).filter(isHead);
       box.hidden = !heads.length;
       box.innerHTML = heads.map(function (a) {
         var nm = esc(nameOf(a)), v = a.video ? "assets/video/" + esc(a.video) : "";
-        var poster = v ? v + (mini ? "-sm.jpg" : ".jpg") : a.photo ? "assets/img/artists/" + esc(a.photo) : "";
+        var poster = v ? v + (small ? "-sm.jpg" : ".jpg") : a.photo ? "assets/img/artists/" + esc(a.photo) : "";
         var media = v
           ? '<video class="lhero__video" muted loop playsinline preload="none" poster="' + poster + '" aria-label="' + nm + ' animation">' +
             '<source src="' + v + '.mp4" type="video/mp4"></video>'
@@ -256,43 +256,6 @@
           '<figcaption class="lhero__text"><span class="lhero__tag">Headliner</span><span class="lhero__name">' + nm + "</span></figcaption></figure>";
       }).join("");
     };
-    /* Lineup page: artist photo cards */
-    var GOLD = ["cross", "dots", "triangle", "circles", "square", "arrow"];
-    var card = function (artist, idx) {
-      var nm = nameOf(artist), photo = artist && artist.photo, head = artist && artist.headliner;
-      var num = String(idx + 1).padStart(2, "0");
-      if (!nm) {
-        return '<figure class="acard acard--soon"><div class="acard__photo">' +
-          '<img class="acard__gold" src="assets/img/elements/' + GOLD[idx % GOLD.length] + '-sm.webp" alt="" loading="lazy" width="220" height="220">' +
-          '<span class="acard__soon">Coming soon</span><span class="acard__num">' + num + "</span></div>" +
-          '<figcaption class="acard__name">To be announced</figcaption></figure>';
-      }
-      var pic = photo
-        ? '<img src="assets/img/artists/' + esc(photo) + '" alt="' + esc(nm) + '" loading="lazy">'
-        : '<span class="acard__initial" aria-hidden="true">' + esc(nm.charAt(0)) + "</span>";
-      return '<figure class="acard' + (head ? " acard--headliner" : "") + (photo ? "" : " acard--nophoto") + '">' +
-        '<div class="acard__photo">' + pic + '<span class="acard__num">' + num + "</span></div>" +
-        '<figcaption class="acard__name">' + esc(nm) + "</figcaption></figure>";
-    };
-    var renderCards = function () {
-      var cols = window.matchMedia("(max-width: 760px)").matches ? 2 : 3;
-      document.querySelectorAll("[data-lineup-cards]").forEach(function (box) {
-        var slug = box.dataset.lineupCards, heads = listOf(slug).filter(isHead).length;
-        var list = listOf(slug).filter(function (a) { return !isHead(a); });
-        var html = list.map(function (a, i) { return card(a, i + heads); }).join("");
-        // fill the last row with "Coming soon" cards (at least one full row before announcements)
-        var used = list.reduce(function (n, a) { return n + (a && a.headliner ? 4 : 1); }, 0);
-        var target = Math.max(cols === 2 ? 4 : 3, Math.ceil((used + (lu.complete ? 0 : 1)) / cols) * cols);
-        if (lu.complete) target = used;
-        for (var k = used; k < target; k++) {
-          html += list.length ? card(null, heads + list.length + (k - used)).replace("Coming soon", "More to come") : card(null, heads + k);
-        }
-        box.innerHTML = html;
-      });
-    };
-    renderCards();
-    window.matchMedia("(max-width: 760px)").addEventListener("change", renderCards);
-
     var total = 0;
     Object.keys(lu.nights || {}).forEach(function (k) { total += lu.nights[k].length; });
 
