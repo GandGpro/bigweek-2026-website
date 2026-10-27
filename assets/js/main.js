@@ -224,12 +224,37 @@
       return '<div class="slot' + (cls ? " slot--" + cls : "") + '">' + text + "<small>" + String(idx).padStart(2, "0") + "</small></div>";
     };
     var nameOf = function (a) { return typeof a === "string" ? a : (a && a.name) || ""; };
-    var renderNight = function (slug) {
-      var names = ((lu.nights && lu.nights[slug]) || []).map(nameOf).filter(Boolean);
-      var html = names.map(function (nm, i) { return slot(esc(nm), i + 1, "name"); }).join("");
-      for (var k = names.length; k < 3; k++) html += slot("Coming soon", k + 1, "");
-      if (names.length >= 3 && !lu.complete) html += slot("More to be announced", names.length + 1, "more");
+    var isHead = function (a) { return !!(a && a.headliner); };
+    var listOf = function (slug) { return ((lu.nights && lu.nights[slug]) || []).filter(nameOf); };
+    /* skipHeads: headliners are shown as a hero (video) above, so list only the rest */
+    var renderNight = function (slug, skipHeads) {
+      var list = listOf(slug), heads = list.filter(isHead).length;
+      var shown = skipHeads ? list.filter(function (a) { return !isHead(a); }) : list;
+      var offset = skipHeads ? heads : 0;
+      var html = shown.map(function (a, i) {
+        return isHead(a)
+          ? '<div class="slot slot--name slot--head">' + esc(nameOf(a)) + "<small>Headliner</small></div>"
+          : slot(esc(nameOf(a)), i + 1 + offset, "name");
+      }).join("");
+      for (var k = list.length; k < 3; k++) html += slot("Coming soon", k + 1, "");
+      if (list.length >= 3 && !lu.complete) html += slot("More to be announced", list.length + 1, "more");
       return html;
+    };
+    /* Headliner hero: looping animation (video) with the poster frame as fallback */
+    var renderHero = function (box) {
+      var slug = box.dataset.lineupHero, mini = box.hasAttribute("data-mini");
+      var heads = listOf(slug).filter(isHead);
+      box.hidden = !heads.length;
+      box.innerHTML = heads.map(function (a) {
+        var nm = esc(nameOf(a)), v = a.video ? "assets/video/" + esc(a.video) : "";
+        var poster = v ? v + (mini ? "-sm.jpg" : ".jpg") : a.photo ? "assets/img/artists/" + esc(a.photo) : "";
+        var media = v
+          ? '<video class="lhero__video" muted loop playsinline preload="none" poster="' + poster + '" aria-label="' + nm + ' animation">' +
+            '<source src="' + v + '.mp4" type="video/mp4"></video>'
+          : poster ? '<img class="lhero__video" src="' + poster + '" alt="' + nm + '" loading="lazy">' : "";
+        return '<figure class="lhero__item">' + (media ? '<div class="lhero__media">' + media + "</div>" : "") +
+          '<figcaption class="lhero__text"><span class="lhero__tag">Headliner</span><span class="lhero__name">' + nm + "</span></figcaption></figure>";
+      }).join("");
     };
     /* Lineup page: artist photo cards */
     var GOLD = ["cross", "dots", "triangle", "circles", "square", "arrow"];
@@ -252,14 +277,15 @@
     var renderCards = function () {
       var cols = window.matchMedia("(max-width: 760px)").matches ? 2 : 3;
       document.querySelectorAll("[data-lineup-cards]").forEach(function (box) {
-        var list = ((lu.nights && lu.nights[box.dataset.lineupCards]) || []).filter(function (a) { return nameOf(a); });
-        var html = list.map(card).join("");
+        var slug = box.dataset.lineupCards, heads = listOf(slug).filter(isHead).length;
+        var list = listOf(slug).filter(function (a) { return !isHead(a); });
+        var html = list.map(function (a, i) { return card(a, i + heads); }).join("");
         // fill the last row with "Coming soon" cards (at least one full row before announcements)
         var used = list.reduce(function (n, a) { return n + (a && a.headliner ? 4 : 1); }, 0);
         var target = Math.max(cols === 2 ? 4 : 3, Math.ceil((used + (lu.complete ? 0 : 1)) / cols) * cols);
         if (lu.complete) target = used;
         for (var k = used; k < target; k++) {
-          html += list.length ? card(null, list.length + (k - used)).replace("Coming soon", "More to come") : card(null, k);
+          html += list.length ? card(null, heads + list.length + (k - used)).replace("Coming soon", "More to come") : card(null, heads + k);
         }
         box.innerHTML = html;
       });
@@ -270,9 +296,23 @@
     var total = 0;
     Object.keys(lu.nights || {}).forEach(function (k) { total += lu.nights[k].length; });
 
+    document.querySelectorAll("[data-lineup-hero]").forEach(renderHero);
     document.querySelectorAll("[data-lineup-night], [data-lineup-teaser]").forEach(function (box) {
-      box.innerHTML = renderNight(box.dataset.lineupNight || box.dataset.lineupTeaser);
+      box.innerHTML = box.dataset.lineupNight ? renderNight(box.dataset.lineupNight) : renderNight(box.dataset.lineupTeaser, true);
     });
+
+    /* Play headliner animations only while on screen (never for reduced motion / data saver) */
+    var vids = document.querySelectorAll("video.lhero__video");
+    var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches || (navigator.connection && navigator.connection.saveData);
+    if (vids.length && !calm && "IntersectionObserver" in window) {
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { var p = e.target.play(); if (p && p.catch) p.catch(function () {}); }
+          else e.target.pause();
+        });
+      }, { threshold: 0.2 });
+      vids.forEach(function (v) { vio.observe(v); });
+    }
     document.querySelectorAll("[data-lineup-status]").forEach(function (el) {
       var slug = el.dataset.lineupStatus;
       var n = slug ? ((lu.nights && lu.nights[slug]) || []).length : total;

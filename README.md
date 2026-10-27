@@ -51,7 +51,7 @@ The site changes itself on these dates:
 ```js
 nights: {
   "yanoz-club": [
-    { name: "Headline Artist", photo: "headline-artist.jpg", headliner: true },
+    { name: "Uncle Waffles", headliner: true, video: "yanoz-club-headliner" },
     { name: "Artist Two", photo: "artist-two.jpg" },
     "Artist Three"
   ],
@@ -60,9 +60,10 @@ nights: {
 ```
 - **Photos:** save them in `assets/img/artists/`. Use portrait 4:5 (about 1000 x 1250 px) JPGs, named simply, e.g. `artist-two.jpg`.
 - **Name only:** an artist without a photo shows a placeholder card with their initial until a photo is added.
-- **Headliner:** `headliner: true` shows the card at double size on the Lineup page.
+- **Headliner:** `headliner: true` puts the artist at the top of their night as the hero: big on the Lineup page, and as the poster in that night's column on Home. The other artists sit below.
+- **Headliner animation:** `video: "yanoz-club-headliner"` points to three files in `assets/video/`: `yanoz-club-headliner.mp4` (720 x 1280, no sound, keep it under ~3 MB), `yanoz-club-headliner.jpg` (a still frame, 720 wide) and `yanoz-club-headliner-sm.jpg` (the same still, 360 wide, used on Home). Animations play muted on a loop only while on screen. Visitors who turn off motion or use data saver see the still instead. Without `video`, a headliner uses its `photo`.
 - **Placeholders:** empty spots show "Coming soon" cards, and a "More to come" card stays at the end until you set `complete: true`.
-- **Where names show:** the Lineup page shows photo cards. The Home lineup and the Chapters page show the names only.
+- **Where names show:** the Lineup page shows the headliner hero plus photo cards. Home shows the headliner poster plus names. The Chapters page shows names only.
 
 ### Partner gallery (Partners page)
 Shown as brand tabs (Flying Fish first), each opening a swipeable row of photos.
