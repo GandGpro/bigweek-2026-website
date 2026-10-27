@@ -725,7 +725,7 @@ html:not(.sale-tbc) [data-tbc] { display: none !important; }
    ========================================================= */
 /* Same night columns as the Home lineup (.lineup-grid), plus a ticket button per night */
 .lineup-col header h2 { margin: 0; font: inherit; }
-.lineup-grid--page .lineup-col { display: flex; flex-direction: column; scroll-margin-top: 110px; }
+.lineup-col { display: flex; flex-direction: column; scroll-margin-top: 110px; }
 .lineup-col__role { margin: -8px 0 14px; font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-dim); }
 .lineup-col__cta { margin-top: auto; padding-top: 16px; }
 .lineup-col__cta .btn { width: 100%; justify-content: center; }

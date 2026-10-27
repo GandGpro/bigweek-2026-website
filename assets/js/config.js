@@ -15,10 +15,10 @@ window.BW_CONFIG = {
     // unless a more specific link below is filled in.
     tickets: "https://bigweek.howler.co.za/bigweek",
     days: {
-      "yanoz-club": "",
-      "shimza": "",
-      "aklalwa-ekhaya": "",
-      "maziwe-ke": ""
+      "yanoz-club": "https://bigweek.howler.co.za/bigweekyanozclub",
+      "shimza": "https://bigweek.howler.co.za/bigweekshimza",
+      "aklalwa-ekhaya": "https://bigweek.howler.co.za/bigweekaklalwaekhaya",
+      "maziwe-ke": "https://bigweek.howler.co.za/bigweekmaziweke"
     },
     bigPass: "",
     bigTable: ""
