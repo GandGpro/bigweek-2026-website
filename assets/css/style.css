@@ -731,6 +731,8 @@ html:not(.sale-tbc) [data-tbc] { display: none !important; }
 .lineup-col__cta .btn { width: 100%; justify-content: center; }
 .slot--name { color: var(--cream); border-style: solid; }
 .slot--name::after { display: none; }
+/* Long names (e.g. a b3b) wrap onto a second line and the box grows with them */
+.lineup-col .slot--name { height: auto; min-height: 58px; padding-block: 12px; line-height: 1; }
 .slot--more { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--text-faint); }
 .slot--head small { letter-spacing: 0.18em; text-transform: uppercase; }
 
@@ -754,6 +756,7 @@ html:not(.sale-tbc) [data-tbc] { display: none !important; }
   .lineup-col header b { font-size: 24px; }
   .lineup-col__role { margin: -4px 0 10px; font-size: 9px; letter-spacing: 0.18em; }
   .lineup-col .slot { height: 44px; padding: 0 10px; margin-top: 8px; font-size: clamp(16px, 5vw, 19px); white-space: nowrap; border-radius: 12px; }
+  .lineup-col .slot--name { height: auto; min-height: 44px; padding-block: 9px; white-space: normal; }
   .lhero__text { height: auto; flex-direction: column-reverse; align-items: flex-start; gap: 2px; padding: 8px 10px; margin-top: 8px; border-radius: 12px; }
   .lhero__name { font-size: 21px; white-space: normal; }
   .lhero__tag { font-size: 9px; }

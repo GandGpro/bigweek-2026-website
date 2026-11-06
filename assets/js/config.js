@@ -40,19 +40,52 @@ window.BW_CONFIG = {
      A headliner without an animation can use photo: "name.jpg" (assets/img/artists/, portrait 9:16).
      Names show in the order listed. Set complete: true once the full lineup is out. */
   lineup: {
-    complete: false,
+    complete: true,
     nights: {
       "yanoz-club": [
-        { name: "Uncle Waffles", headliner: true, video: "yanoz-club-headliner" }
+        { name: "Uncle Waffles", headliner: true, video: "yanoz-club-headliner" },
+        "Kabza De Small",
+        "Royal Musiq",
+        "Sliqe",
+        "JNR SA",
+        "Sam Deep",
+        "KOKO",
+        "Xola TSM",
+        "Jay Cube"
       ],
       "shimza": [
-        { name: "SHIMZA", headliner: true, video: "shimza-headliner" }
+        { name: "SHIMZA", headliner: true, video: "shimza-headliner" },
+        "Mörda",
+        "DJ Lag",
+        "Mpho.Wav",
+        "FKA Mash",
+        "Bun Xapa",
+        "Argento Dust",
+        "Stanky",
+        "Kelvin Urwin"
       ],
       "aklalwa-ekhaya": [
-        { name: "Dlala Thukzin", headliner: true, video: "aklalwa-ekhaya-headliner" }
+        { name: "Dlala Thukzin", headliner: true, video: "aklalwa-ekhaya-headliner" },
+        "Sun El Musician",
+        "GOLDMAX b3b DANKIE BOI b3b BLACKS JNR",
+        "Kasango",
+        "Funky Qla",
+        "Karyendasoul",
+        "Nouveaux",
+        "Cam White",
+        "Motion RSA"
       ],
       "maziwe-ke": [
-        { name: "Zee Nxumalo", headliner: true, video: "maziwe-ke-headliner" }
+        { name: "Zee Nxumalo", headliner: true, video: "maziwe-ke-headliner" },
+        "DJ Kent",
+        "DBN Gogo",
+        "DJ Tira",
+        "Nomfundo Kay",
+        "Nayvee Womculo",
+        "Asvnte",
+        "Man Q",
+        "QJ DJ",
+        "Neil Hunter"
       ]
     }
   },
